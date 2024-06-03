@@ -11,7 +11,7 @@ getData('https://pokeapi.co/api/v2/pokemon?limit=25&offset=0')
 </script>
 
 <template>
-  <h1 class="mt-10 text-[--main-color-text]">Pokemones</h1>
+  <h1 class="my-10 text-2xl font-medium text-gray-900">Pokemones</h1>
   <Loading v-if="loading" />
   <div v-else-if="error">Error: {{ error }}</div>
   <div v-if="data">

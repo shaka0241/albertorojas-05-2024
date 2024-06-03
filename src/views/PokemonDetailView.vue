@@ -1,10 +1,11 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useGetData } from '@/composables/getData'
 import Loading from '@/components/Loading.vue'
 
-const { data, error, getData } = useGetData()
+const { data, error, getData, loading } = useGetData()
+const router = useRouter()
 const route = useRoute()
 const sprites = ref(null)
 onMounted(async () => {
@@ -18,6 +19,9 @@ onMounted(async () => {
     sprites.value = data.value.sprites.front_shiny
   }
 })
+const close = () => {
+  router.push('/')
+}
 </script>
 <template>
   <div v-if="data" class="mx-auto max-w-7xl sm:px-6 lg:px-8 my-10">
@@ -27,7 +31,12 @@ onMounted(async () => {
       >
         <div class="flex flex-1 flex-col p-8">
           <Loading v-if="loading" />
-          <img class="mx-auto h-32 w-32 flex-shrink-0 rounded-full" :src="sprites" alt="" />
+          <img
+            v-show="!loading"
+            class="mx-auto h-32 w-32 flex-shrink-0 rounded-full"
+            :src="sprites"
+            alt=""
+          />
           <h3 class="mt-6 text-sm font-medium text-gray-900">{{ data.name.toUpperCase() }}</h3>
           <div class="p-4 text-gray-900">
             <div>
@@ -65,5 +74,14 @@ onMounted(async () => {
         </div>
       </li>
     </ul>
+    <div class="flex flex-col items-center">
+      <button
+        @click="close"
+        type="button"
+        class="rounded-md bg-white/10 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-white/20"
+      >
+        Volver
+      </button>
+    </div>
   </div>
 </template>
