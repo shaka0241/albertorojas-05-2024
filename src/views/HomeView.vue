@@ -1,5 +1,5 @@
 <script setup>
-import Spinner from '@/components/Loading.vue'
+import Loading from '@/components/Loading.vue'
 
 import { useGetData } from '@/composables/getData'
 
@@ -12,7 +12,7 @@ getData('https://pokeapi.co/api/v2/pokemon?limit=25&offset=0')
 
 <template>
   <h1 class="mt-10 text-[--main-color-text]">Pokemones</h1>
-  <Spinner v-if="loading" />
+  <Loading v-if="loading" />
   <div v-else-if="error">Error: {{ error }}</div>
   <div v-if="data">
     {{ data.id }}
@@ -21,7 +21,7 @@ getData('https://pokeapi.co/api/v2/pokemon?limit=25&offset=0')
         <router-link
           :to="`/team/${extractPokemonId(pokemon.url)}`"
           class="block w-full hover:text-[--main-color-text]"
-          >{{ pokemon.name }}</router-link
+          >{{ pokemon.name.toUpperCase() }}</router-link
         >
       </li>
     </ul>

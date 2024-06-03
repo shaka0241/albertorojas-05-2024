@@ -12,7 +12,6 @@ import { RouterLink, RouterView } from 'vue-router'
     />
     <nav class="flex gap-4 items-start">
       <RouterLink to="/" class="hover:border-b border-[--main-color-text]">Home</RouterLink>
-      <RouterLink to="/team">About</RouterLink>
     </nav>
   </header>
   <RouterView />

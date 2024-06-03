@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useGetData } from '@/composables/getData'
+import Loading from '@/components/Loading.vue'
 
 const { data, error, getData } = useGetData()
 const route = useRoute()
@@ -25,14 +26,7 @@ onMounted(async () => {
         class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow"
       >
         <div class="flex flex-1 flex-col p-8">
-          <div class="p-4">
-            <h2 class="text-2xl font-bold mb-4">Reproductor de Audio</h2>
-            <audio controls>
-              <source :src="data.cries.latest" type="audio/ogg" />
-              Tu navegador no soporta el elemento de audio.
-            </audio>
-          </div>
-
+          <Loading v-if="loading" />
           <img class="mx-auto h-32 w-32 flex-shrink-0 rounded-full" :src="sprites" alt="" />
           <h3 class="mt-6 text-sm font-medium text-gray-900">{{ data.name.toUpperCase() }}</h3>
           <div class="p-4 text-gray-900">
@@ -57,6 +51,15 @@ onMounted(async () => {
               <span class="mr-2">
                 {{ data.weight }}
               </span>
+            </div>
+          </div>
+          <div class="p-4 text-gray-900">
+            <div class="flex flex-col items-center">
+              <span>Sonido: </span>
+              <audio controls class="mt-2">
+                <source :src="data.cries.latest" type="audio/ogg" />
+                Tu navegador no soporta el elemento de audio.
+              </audio>
             </div>
           </div>
         </div>
