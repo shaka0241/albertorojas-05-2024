@@ -1,8 +1,9 @@
 <script setup>
-// import { ref, onMounted } from 'vue'
 import Spinner from '@/components/Loading.vue'
 
 import { useGetData } from '@/composables/getData'
+
+import { extractPokemonId } from '@/utils/extractPokemonId'
 
 const { data, error, loading, getData } = useGetData()
 
@@ -14,11 +15,14 @@ getData('https://pokeapi.co/api/v2/pokemon?limit=25&offset=0')
   <Spinner v-if="loading" />
   <div v-else-if="error">Error: {{ error }}</div>
   <div v-if="data">
+    {{ data.id }}
     <ul class="container-grid py-4">
-      <li v-for="pokemon in data.results" :key="pokemon.id" class="pb-2 text-center">
-        <p class="--main-color-text block w-full hover:text-[--main-color-text]">
-          {{ pokemon.name }}
-        </p>
+      <li v-for="pokemon in data.results" :key="pokemon.id" class="border-b-2 pb-2 text-center">
+        <router-link
+          :to="`/team/${extractPokemonId(pokemon.url)}`"
+          class="block w-full hover:text-[--main-color-text]"
+          >{{ pokemon.name }}</router-link
+        >
       </li>
     </ul>
     <div class="mt-8 flex gap-4">
