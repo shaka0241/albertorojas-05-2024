@@ -3,6 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 :root {
+  --vt-talana-color: #8567ff;
   --vt-c-white: #ffffff;
   --vt-c-white-soft: #f8f8f8;
   --vt-c-white-mute: #f2f2f2;
@@ -38,7 +39,7 @@
 
   --section-gap: 160px;
 
-  --main-color-text: #43ba83;
+  --main-color-text: #343a40;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -66,7 +67,7 @@
 body {
   min-height: 100vh;
   color: var(--color-text);
-  background: var(--color-background);
+  background: var(--vt-talana-color);
   transition:
     color 0.5s,
     background-color 0.5s;
